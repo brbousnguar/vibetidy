@@ -1,0 +1,51 @@
+{
+  "name": "tidyrepo",
+  "version": "0.1.0",
+  "description": "Clean up vibecoded repos: generate a grounded README and keep an issue trail. Zero dependencies.",
+  "type": "module",
+  "bin": {
+    "tidyrepo": "./bin/tidyrepo.js"
+  },
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20.10.0"
+  },
+  "scripts": {
+    "test": "node --test \"test/**/*.test.js\"",
+    "lint": "node --check bin/tidyrepo.js",
+    "prepublishOnly": "npm test"
+  },
+  "keywords": [
+    "readme",
+    "readme-generator",
+    "cli",
+    "git-hooks",
+    "pre-commit",
+    "github-issues",
+    "changelog",
+    "documentation",
+    "ai",
+    "llm",
+    "vibecoding",
+    "developer-tools"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brbousnguar/tidyrepo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/brbousnguar/tidyrepo/issues"
+  },
+  "homepage": "https://github.com/brbousnguar/tidyrepo#readme",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {}
+}
