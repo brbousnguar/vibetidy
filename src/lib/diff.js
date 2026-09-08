@@ -17,7 +17,7 @@ export function renderDiff(before, after, label = 'README.md') {
     fs.writeFileSync(b, after);
     const res = spawnSync(
       'git',
-      ['diff', '--no-index', '--no-prefix', `--src-prefix=a/`, `--dst-prefix=b/`, '--', a, b],
+      ['diff', '--no-index', '--src-prefix=a/', '--dst-prefix=b/', '--', a, b],
       { encoding: 'utf8', maxBuffer: 32 * 1024 * 1024 },
     );
     if (!res.error && typeof res.stdout === 'string' && res.stdout.length) {

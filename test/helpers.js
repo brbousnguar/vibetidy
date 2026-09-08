@@ -5,6 +5,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 
 /** Create a temp directory populated from a { relativePath: contents } map. */
 export function makeFixture(files = {}) {
@@ -33,7 +34,8 @@ export const gitIn = (dir, args) => spawnSync('git', args, { cwd: dir, encoding:
 
 /** Run the CLI in a child process. Returns { status, stdout, stderr }. */
 export function runCli(args, { cwd = process.cwd(), env = {} } = {}) {
-  const bin = path.join(import.meta.dirname, '..', 'bin', 'tidyrepo.js');
+  const here = path.dirname(fileURLToPath(import.meta.url));
+  const bin = path.join(here, '..', 'bin', 'tidyrepo.js');
   const res = spawnSync(process.execPath, [bin, ...args], {
     cwd,
     encoding: 'utf8',

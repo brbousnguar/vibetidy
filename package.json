@@ -19,8 +19,8 @@
     "node": ">=20.10.0"
   },
   "scripts": {
-    "test": "node --test \"test/**/*.test.js\"",
-    "lint": "node --check bin/tidyrepo.js",
+    "test": "node --test",
+    "lint": "node -e \"import('./src/index.js')\"",
     "prepublishOnly": "npm test"
   },
   "keywords": [
