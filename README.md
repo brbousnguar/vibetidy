@@ -1,12 +1,20 @@
-# vibetidy
+<div align="center">
+  <img src="https://raw.githubusercontent.com/brbousnguar/vibetidy/main/docs/logo.png" width="72" alt="vibetidy" />
+  <h1>vibetidy</h1>
+  <p>
+    <strong>Two checks that make an AI-generated repo look maintained.</strong><br/>
+    Generates a README from what your code actually contains, and warns when a
+    feature-sized commit has no issue behind it.
+  </p>
 
-**Two checks that make an AI-generated repo look maintained.**
-Generates a README from what your code actually contains, and warns when a feature-sized commit has no issue behind it.
-
-[![npm](https://img.shields.io/npm/v/vibetidy?color=0E8A16)](https://www.npmjs.com/package/vibetidy)
+[![npm](https://img.shields.io/npm/v/vibetidy?color=E8A33D)](https://www.npmjs.com/package/vibetidy)
 [![node](https://img.shields.io/badge/node-%3E%3D20.10-informational)](https://nodejs.org)
 [![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 [![dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)](package.json)
+
+</div>
+
+---
 
 You shipped something from v0, Bolt, Lovable, or a long Claude session. It works. The README still says *Getting Started with Create React App*, there is no record of why anything was built, and the changelog does not exist. `vibetidy` fixes those two things and stops.
 
