@@ -1,25 +1,25 @@
-# tidyrepo
+# vibetidy
 
 **Two checks that make an AI-generated repo look maintained.**
 Generates a README from what your code actually contains, and warns when a feature-sized commit has no issue behind it.
 
-[![npm](https://img.shields.io/npm/v/tidyrepo?color=0E8A16)](https://www.npmjs.com/package/tidyrepo)
+[![npm](https://img.shields.io/npm/v/vibetidy?color=0E8A16)](https://www.npmjs.com/package/vibetidy)
 [![node](https://img.shields.io/badge/node-%3E%3D20.10-informational)](https://nodejs.org)
 [![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 [![dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)](package.json)
 
-You shipped something from v0, Bolt, Lovable, or a long Claude session. It works. The README still says *Getting Started with Create React App*, there is no record of why anything was built, and the changelog does not exist. `tidyrepo` fixes those two things and stops.
+You shipped something from v0, Bolt, Lovable, or a long Claude session. It works. The README still says *Getting Started with Create React App*, there is no record of why anything was built, and the changelog does not exist. `vibetidy` fixes those two things and stops.
 
 ```bash
-npx tidyrepo readme                      # generate README.md, review the diff, confirm
-npx tidyrepo issue-check --install-hook  # nag on feature commits with no issue
+npx vibetidy readme                      # generate README.md, review the diff, confirm
+npx vibetidy issue-check --install-hook  # nag on feature commits with no issue
 ```
 
 ## What it does
 
 - **`readme`** — scans the repository (manifest, scripts, dependencies, `.env.example`, entry points, folder tree, existing README), sends only those verified facts to an LLM, and writes a README in a fixed structure: What it does / Requirements / Setup / Run / Reference / Tech stack / Repository layout / Notes. Shows a diff and waits for confirmation before touching the file.
 - **`issue-check`** — classifies your staged changes. New source files or a substantial diff means "feature"; lockfiles, build output, docs and tests are excluded. If it is a feature and no issue number appears in the branch name or the commits, it says so. Offers to create the issue with `gh` and writes a `changelog/unreleased/` fragment.
-- **Zero runtime dependencies.** `npx tidyrepo` downloads one package, not three hundred.
+- **Zero runtime dependencies.** `npx vibetidy` downloads one package, not three hundred.
 - **Any OpenAI-compatible endpoint.** OpenAI, OpenRouter, Anthropic, Groq, DeepSeek, Together, or a local Ollama / LM Studio.
 
 ### The grounding rule
@@ -29,7 +29,7 @@ The scanner is the product; the model is a formatter. Everything the README is a
 You can see exactly what would be sent, with no API key:
 
 ```bash
-npx tidyrepo readme --print-context
+npx vibetidy readme --print-context
 ```
 
 ## Requirements
@@ -41,10 +41,10 @@ npx tidyrepo readme --print-context
 
 ## Setup
 
-No install step: `npx tidyrepo <command>` runs the latest version. To install it permanently:
+No install step: `npx vibetidy <command>` runs the latest version. To install it permanently:
 
 ```bash
-npm install -g tidyrepo
+npm install -g vibetidy
 ```
 
 Point it at a provider with one environment variable:
@@ -58,37 +58,37 @@ export OPENROUTER_API_KEY=sk-or-...   # then: --provider openrouter
 | Variable | Required | Purpose |
 |---|---|---|
 | `OPENAI_API_KEY` | for `readme` on the default provider | OpenAI API key |
-| `TIDYREPO_API_KEY` | no | Overrides whichever provider key would otherwise be used |
-| `TIDYREPO_PROVIDER` | no | `openai` (default), `openrouter`, `anthropic`, `groq`, `deepseek`, `together`, `ollama`, `lmstudio` |
-| `TIDYREPO_MODEL` | no | Model id, overriding the provider default |
-| `TIDYREPO_BASE_URL` | no | Any other OpenAI-compatible endpoint |
+| `VIBETIDY_API_KEY` | no | Overrides whichever provider key would otherwise be used |
+| `VIBETIDY_PROVIDER` | no | `openai` (default), `openrouter`, `anthropic`, `groq`, `deepseek`, `together`, `ollama`, `lmstudio` |
+| `VIBETIDY_MODEL` | no | Model id, overriding the provider default |
+| `VIBETIDY_BASE_URL` | no | Any other OpenAI-compatible endpoint |
 | `SKIP_ISSUE_CHECK` | no | Set to `1` to bypass the pre-commit hook once |
 
 Each provider also reads its own key variable (`ANTHROPIC_API_KEY`, `GROQ_API_KEY`, `DEEPSEEK_API_KEY`, `TOGETHER_API_KEY`). Local providers need no key at all:
 
 ```bash
-npx tidyrepo readme --provider ollama --model llama3.1
+npx vibetidy readme --provider ollama --model llama3.1
 ```
 
 ## Run
 
 ```bash
-npx tidyrepo readme                        # current directory
-npx tidyrepo readme ./packages/api         # somewhere else
-npx tidyrepo issue-check                   # check what is staged
-npx tidyrepo --help
+npx vibetidy readme                        # current directory
+npx vibetidy readme ./packages/api         # somewhere else
+npx vibetidy issue-check                   # check what is staged
+npx vibetidy --help
 ```
 
 ## Commands
 
-### `tidyrepo readme [path]`
+### `vibetidy readme [path]`
 
 Scans a repository and writes a README grounded in what it finds. Nothing is written until you confirm.
 
 ```bash
-npx tidyrepo readme --print-context     # inspect the facts and prompt, no key needed
-npx tidyrepo readme --dry-run           # generate and diff, never write
-npx tidyrepo readme --yes               # write without the prompt (for CI)
+npx vibetidy readme --print-context     # inspect the facts and prompt, no key needed
+npx vibetidy readme --dry-run           # generate and diff, never write
+npx vibetidy readme --yes               # write without the prompt (for CI)
 ```
 
 | Option | Purpose |
@@ -106,15 +106,15 @@ When a README already exists, accurate prose is preserved and stale claims are r
 
 Without a TTY (CI, a pipe) the confirmation cannot be answered, so nothing is written and the command exits 1 — pass `--yes` for non-interactive runs.
 
-### `tidyrepo issue-check [path]`
+### `vibetidy issue-check [path]`
 
 Checks the staged changes — or, with nothing staged, the branch against its base — and looks for an issue number.
 
 ```bash
-npx tidyrepo issue-check                     # warn (exit 0)
-npx tidyrepo issue-check --strict            # block (exit 1)
-npx tidyrepo issue-check --against main      # check a whole branch, e.g. in CI
-npx tidyrepo issue-check --install-hook      # install the pre-commit hook
+npx vibetidy issue-check                     # warn (exit 0)
+npx vibetidy issue-check --strict            # block (exit 1)
+npx vibetidy issue-check --against main      # check a whole branch, e.g. in CI
+npx vibetidy issue-check --install-hook      # install the pre-commit hook
 ```
 
 | Option | Purpose |
@@ -137,12 +137,12 @@ npx tidyrepo issue-check --install-hook      # install the pre-commit hook
 ### The pre-commit hook
 
 ```bash
-npx tidyrepo issue-check --install-hook
+npx vibetidy issue-check --install-hook
 ```
 
-Writes `.git/hooks/pre-commit`, honouring `core.hooksPath`. If a hook already exists, tidyrepo asks before appending its block and never overwrites what is there. The block is delimited by markers, so `--uninstall-hook` removes exactly it and leaves the rest.
+Writes `.git/hooks/pre-commit`, honouring `core.hooksPath`. If a hook already exists, vibetidy asks before appending its block and never overwrites what is there. The block is delimited by markers, so `--uninstall-hook` removes exactly it and leaves the rest.
 
-If `tidyrepo` is not installed when the hook runs, the block does nothing. A missing tool is never the reason a commit fails.
+If `vibetidy` is not installed when the hook runs, the block does nothing. A missing tool is never the reason a commit fails.
 
 Bypass one commit with `SKIP_ISSUE_CHECK=1 git commit ...`, or all hooks with `git commit --no-verify`.
 
@@ -185,7 +185,7 @@ One fragment file per branch, never a direct edit to `CHANGELOG.md`. Two pull re
 ```text
 .
 ├── bin/
-│   └── tidyrepo.js        # executable entry point
+│   └── vibetidy.js        # executable entry point
 ├── src/
 │   ├── cli.js             # argument parsing and command dispatch
 │   ├── index.js           # programmatic API
@@ -211,7 +211,7 @@ One fragment file per branch, never a direct edit to `CHANGELOG.md`. Two pull re
 - **`readme` sends repository metadata to your chosen provider**: manifest contents, dependency names, script names, environment *variable names* (never values — it reads `.env.example`, never `.env`), the folder tree, and the existing README. It never sends your source code. Use `--print-context` to see the payload, or `--provider ollama` to keep it on your machine.
 - **The scanner and the classifier are importable** if you want to build something else on them:
   ```js
-  import { scan, classifyChange, findIssueRefs } from 'tidyrepo';
+  import { scan, classifyChange, findIssueRefs } from 'vibetidy';
   ```
 - The test suite never touches the network. The one function that would is injected and stubbed.
 

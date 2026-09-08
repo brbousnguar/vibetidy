@@ -57,7 +57,7 @@ describe('readme --print-context', () => {
   test('works with no API key and prints grounded facts', () => {
     const dir = fixture(NODE_FIXTURE);
     const res = runCli(['readme', dir, '--print-context'], {
-      env: { OPENAI_API_KEY: '', TIDYREPO_API_KEY: '' },
+      env: { OPENAI_API_KEY: '', VIBETIDY_API_KEY: '' },
     });
     assert.equal(res.status, 0);
     assert.match(res.stdout, /system prompt/);
@@ -75,7 +75,7 @@ describe('readme --print-context', () => {
   test('a missing API key is a clear error, and never a network call', () => {
     const dir = fixture(NODE_FIXTURE);
     const res = runCli(['readme', dir], {
-      env: { OPENAI_API_KEY: '', TIDYREPO_API_KEY: '', TIDYREPO_PROVIDER: 'openai' },
+      env: { OPENAI_API_KEY: '', VIBETIDY_API_KEY: '', VIBETIDY_PROVIDER: 'openai' },
     });
     assert.equal(res.status, 1);
     assert.match(res.stderr, /No API key found/);

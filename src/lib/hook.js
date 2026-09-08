@@ -7,20 +7,20 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { git } from './git.js';
 
-export const MARKER = '# >>> tidyrepo issue-check >>>';
-export const END_MARKER = '# <<< tidyrepo issue-check <<<';
+export const MARKER = '# >>> vibetidy issue-check >>>';
+export const END_MARKER = '# <<< vibetidy issue-check <<<';
 
 export const HOOK_BLOCK = `${MARKER}
 # Warns when a commit looks like a feature with no linked issue.
 # Add --strict below to block such commits instead of warning.
 # Set SKIP_ISSUE_CHECK=1 to bypass once, or delete this block to uninstall.
-# If tidyrepo is not installed the block does nothing: a missing tool must
+# If vibetidy is not installed the block does nothing: a missing tool must
 # never be the reason a commit fails.
 if [ -z "$SKIP_ISSUE_CHECK" ]; then
-  if command -v tidyrepo >/dev/null 2>&1; then
-    tidyrepo issue-check --hook || exit $?
-  elif npx --no-install tidyrepo --version >/dev/null 2>&1; then
-    npx --no-install tidyrepo issue-check --hook || exit $?
+  if command -v vibetidy >/dev/null 2>&1; then
+    vibetidy issue-check --hook || exit $?
+  elif npx --no-install vibetidy --version >/dev/null 2>&1; then
+    npx --no-install vibetidy issue-check --hook || exit $?
   fi
 fi
 ${END_MARKER}`;

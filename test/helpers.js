@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url';
 
 /** Create a temp directory populated from a { relativePath: contents } map. */
 export function makeFixture(files = {}) {
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'tidyrepo-test-'));
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'vibetidy-test-'));
   for (const [rel, contents] of Object.entries(files)) {
     const full = path.join(dir, rel);
     fs.mkdirSync(path.dirname(full), { recursive: true });
@@ -35,7 +35,7 @@ export const gitIn = (dir, args) => spawnSync('git', args, { cwd: dir, encoding:
 /** Run the CLI in a child process. Returns { status, stdout, stderr }. */
 export function runCli(args, { cwd = process.cwd(), env = {} } = {}) {
   const here = path.dirname(fileURLToPath(import.meta.url));
-  const bin = path.join(here, '..', 'bin', 'tidyrepo.js');
+  const bin = path.join(here, '..', 'bin', 'vibetidy.js');
   const res = spawnSync(process.execPath, [bin, ...args], {
     cwd,
     encoding: 'utf8',

@@ -59,22 +59,22 @@ export class LlmConfigError extends Error {}
  * @param {{provider?: string, model?: string, baseUrl?: string}} opts
  */
 export function resolveConfig(opts = {}, env = process.env) {
-  const providerName = opts.provider || env.TIDYREPO_PROVIDER || 'openai';
+  const providerName = opts.provider || env.VIBETIDY_PROVIDER || 'openai';
   const preset = PRESETS[providerName];
   if (!preset) {
     throw new LlmConfigError(
       `Unknown provider "${providerName}". Known: ${providerNames.join(', ')}.\n` +
-      `For anything else, set TIDYREPO_BASE_URL and TIDYREPO_API_KEY directly.`,
+      `For anything else, set VIBETIDY_BASE_URL and VIBETIDY_API_KEY directly.`,
     );
   }
 
-  const baseUrl = (opts.baseUrl || env.TIDYREPO_BASE_URL || preset.baseUrl).replace(/\/+$/, '');
-  const model = opts.model || env.TIDYREPO_MODEL || preset.model;
-  const apiKey = env.TIDYREPO_API_KEY || env[preset.keyEnv] || null;
+  const baseUrl = (opts.baseUrl || env.VIBETIDY_BASE_URL || preset.baseUrl).replace(/\/+$/, '');
+  const model = opts.model || env.VIBETIDY_MODEL || preset.model;
+  const apiKey = env.VIBETIDY_API_KEY || env[preset.keyEnv] || null;
 
   if (!apiKey && !preset.keyOptional) {
     throw new LlmConfigError(
-      `No API key found. Set ${preset.keyEnv} (or TIDYREPO_API_KEY) in your environment.\n` +
+      `No API key found. Set ${preset.keyEnv} (or VIBETIDY_API_KEY) in your environment.\n` +
       `  export ${preset.keyEnv}=sk-...\n` +
       `Other providers: --provider ${providerNames.join('|')}\n` +
       `No key handy? Run with --print-context to see exactly what would be sent.`,
@@ -93,8 +93,8 @@ export async function complete({ system, user, config, maxTokens = 4096, tempera
   if (config.apiKey) headers.Authorization = `Bearer ${config.apiKey}`;
   // OpenRouter attributes traffic by these; harmless elsewhere.
   if (config.provider === 'openrouter') {
-    headers['HTTP-Referer'] = 'https://github.com/brbousnguar/tidyrepo';
-    headers['X-Title'] = 'tidyrepo';
+    headers['HTTP-Referer'] = 'https://github.com/brbousnguar/vibetidy';
+    headers['X-Title'] = 'vibetidy';
   }
 
   let res;

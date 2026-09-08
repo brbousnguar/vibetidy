@@ -1,10 +1,10 @@
-# Contributing to tidyrepo
+# Contributing to vibetidy
 
 Thanks for taking the time. This is a small tool with a deliberately small surface — the fastest way to get a change merged is to keep it that way.
 
 ## Ground rules
 
-**Zero runtime dependencies.** `"dependencies": {}` is a feature, not an oversight: `npx tidyrepo` should download one package. A pull request that adds a runtime dependency needs to argue why the standard library cannot do it. Dev dependencies are held to nearly the same bar — the test suite is `node:test`.
+**Zero runtime dependencies.** `"dependencies": {}` is a feature, not an oversight: `npx vibetidy` should download one package. A pull request that adds a runtime dependency needs to argue why the standard library cannot do it. Dev dependencies are held to nearly the same bar — the test suite is `node:test`.
 
 **The scanner is the product.** Everything the README generator may claim comes from `src/lib/scan.js`. If you want the output to mention something new, add it to the scan first, then to the prompt. Never widen what the model is allowed to assert on its own.
 
@@ -15,22 +15,22 @@ Thanks for taking the time. This is a small tool with a deliberately small surfa
 ## Getting set up
 
 ```bash
-git clone https://github.com/brbousnguar/tidyrepo.git
-cd tidyrepo
+git clone https://github.com/brbousnguar/vibetidy.git
+cd vibetidy
 npm test
 ```
 
 There is no build step and nothing to install. Run the CLI straight from the checkout:
 
 ```bash
-node bin/tidyrepo.js readme --print-context
-node bin/tidyrepo.js issue-check --help
+node bin/vibetidy.js readme --print-context
+node bin/vibetidy.js issue-check --help
 ```
 
 To try the generation path without spending tokens, point `--base-url` at any local server that answers `POST /v1/chat/completions` with the OpenAI response shape — an Ollama instance works:
 
 ```bash
-node bin/tidyrepo.js readme ../some-repo --provider ollama --model llama3.1 --dry-run
+node bin/vibetidy.js readme ../some-repo --provider ollama --model llama3.1 --dry-run
 ```
 
 ## Making a change

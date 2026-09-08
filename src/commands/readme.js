@@ -1,4 +1,4 @@
-// `tidyrepo readme` — scan a repo, generate a grounded README, preview the
+// `vibetidy readme` — scan a repo, generate a grounded README, preview the
 // diff, write it only on confirmation.
 
 import fs from 'node:fs';
@@ -9,10 +9,10 @@ import { SYSTEM_PROMPT, buildUserPrompt, cleanMarkdown } from '../lib/template.j
 import { renderDiff, printDiff, diffStats } from '../lib/diff.js';
 import { bold, confirm, dim, fail, info, interactive, ok, step, warn } from '../lib/ui.js';
 
-export const usage = `${bold('tidyrepo readme')} — generate or refresh README.md from what the repo actually contains
+export const usage = `${bold('vibetidy readme')} — generate or refresh README.md from what the repo actually contains
 
 Usage:
-  npx tidyrepo readme [path] [options]
+  npx vibetidy readme [path] [options]
 
 Options:
   --print-context     Print the scanned facts and the prompt, then exit. No API
@@ -28,11 +28,11 @@ Options:
   --base-url <url>    Any other OpenAI-compatible endpoint.
 
 Environment:
-  TIDYREPO_API_KEY    Overrides the provider's own key variable.
+  VIBETIDY_API_KEY    Overrides the provider's own key variable.
   OPENAI_API_KEY      (or OPENROUTER_API_KEY, ANTHROPIC_API_KEY, ... per provider)
-  TIDYREPO_PROVIDER   Same as --provider.
-  TIDYREPO_MODEL      Same as --model.
-  TIDYREPO_BASE_URL   Same as --base-url.`;
+  VIBETIDY_PROVIDER   Same as --provider.
+  VIBETIDY_MODEL      Same as --model.
+  VIBETIDY_BASE_URL   Same as --base-url.`;
 
 export async function run(args) {
   const targetArg = args.positionals[0] || '.';
@@ -101,7 +101,7 @@ export async function run(args) {
   const before = fs.existsSync(outPath) ? fs.readFileSync(outPath, 'utf8') : '';
 
   if (before === markdown) {
-    ok('README is already what tidyrepo would write — nothing to do.');
+    ok('README is already what vibetidy would write — nothing to do.');
     return 0;
   }
 

@@ -1,4 +1,4 @@
-// `tidyrepo issue-check` — warn when a feature-sized change carries no issue
+// `vibetidy issue-check` — warn when a feature-sized change carries no issue
 // reference. Runs as a CLI check or as a pre-commit hook.
 //
 // Warns by default and blocks only with --strict. A hook that blocks on day
@@ -12,10 +12,10 @@ import { classifyChange, findIssueRefs, slugify, changelogFragment } from '../li
 import { installHook, uninstallHook, inspectHook, HOOK_BLOCK } from '../lib/hook.js';
 import { ask, bold, confirm, dim, fail, info, interactive, ok, warn } from '../lib/ui.js';
 
-export const usage = `${bold('tidyrepo issue-check')} — warn when a feature-sized change has no linked issue
+export const usage = `${bold('vibetidy issue-check')} — warn when a feature-sized change has no linked issue
 
 Usage:
-  npx tidyrepo issue-check [path] [options]
+  npx vibetidy issue-check [path] [options]
 
 Checks the staged changes (or, with nothing staged, the branch against its
 base) and looks for an issue number in the branch name or the commits on the
@@ -228,14 +228,14 @@ async function doInstallHook(root, args) {
   if (state.exists) {
     warn(`A pre-commit hook already exists: ${state.path}`);
     const consent = args.values.yes
-      || (await confirm('Append the tidyrepo block to it?', { fallback: false }));
+      || (await confirm('Append the vibetidy block to it?', { fallback: false }));
     if (!consent) {
       info('Left untouched. Add this to your hook manually:\n');
       console.log(HOOK_BLOCK);
       return 0;
     }
     const res = installHook(root, { append: true });
-    ok(`Appended the tidyrepo block to ${res.path}`);
+    ok(`Appended the vibetidy block to ${res.path}`);
     return 0;
   }
 
@@ -252,9 +252,9 @@ async function doInstallHook(root, args) {
 function doUninstallHook(root) {
   const res = uninstallHook(root);
   if (res.status === 'not-installed') {
-    info('No tidyrepo hook block found.');
+    info('No vibetidy hook block found.');
     return 0;
   }
-  ok(res.status === 'removed' ? `Removed ${res.path}` : `Stripped the tidyrepo block from ${res.path}`);
+  ok(res.status === 'removed' ? `Removed ${res.path}` : `Stripped the vibetidy block from ${res.path}`);
   return 0;
 }

@@ -11,9 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 ## [0.1.0] - 2026-09-08
 
 ### Added
-- `tidyrepo readme` — scans a repository and generates or refreshes README.md
+- `vibetidy readme` — scans a repository and generates or refreshes README.md
   from verified facts, with a diff preview before writing.
-- `tidyrepo issue-check` — warns when a feature-sized change carries no linked
+- `vibetidy issue-check` — warns when a feature-sized change carries no linked
   GitHub issue; installs as a pre-commit hook, offers to create the issue
   via `gh`, and writes a changelog fragment.
 - Provider-agnostic LLM client for any OpenAI-compatible endpoint, with

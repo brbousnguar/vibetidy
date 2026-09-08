@@ -39,10 +39,10 @@ const OPTIONS = {
   'uninstall-hook': { type: 'boolean' },
 };
 
-const HELP = `${bold('tidyrepo')} — clean up vibecoded repos ${dim(`v${VERSION}`)}
+const HELP = `${bold('vibetidy')} — clean up vibecoded repos ${dim(`v${VERSION}`)}
 
 Usage:
-  npx tidyrepo <command> [path] [options]
+  npx vibetidy <command> [path] [options]
 
 Commands:
   readme          Generate or refresh README.md from what the repo actually
@@ -51,15 +51,15 @@ Commands:
                   Installs as a pre-commit hook.
 
 Options:
-  -h, --help      Show help (or ${dim('tidyrepo <command> --help')} for one command)
+  -h, --help      Show help (or ${dim('vibetidy <command> --help')} for one command)
   -v, --version   Print the version
 
 Examples:
-  npx tidyrepo readme --print-context      ${dim('# see the facts, no API key needed')}
-  npx tidyrepo readme                      ${dim('# generate, review the diff, confirm')}
-  npx tidyrepo issue-check --install-hook  ${dim('# nag on feature commits from now on')}
+  npx vibetidy readme --print-context      ${dim('# see the facts, no API key needed')}
+  npx vibetidy readme                      ${dim('# generate, review the diff, confirm')}
+  npx vibetidy issue-check --install-hook  ${dim('# nag on feature commits from now on')}
 
-Docs: https://github.com/brbousnguar/tidyrepo`;
+Docs: https://github.com/brbousnguar/vibetidy`;
 
 export async function main(argv) {
   let parsed;
@@ -67,7 +67,7 @@ export async function main(argv) {
     parsed = parseArgs({ args: argv, options: OPTIONS, allowPositionals: true, strict: true });
   } catch (err) {
     fail(err.message);
-    console.error(dim('\nRun `tidyrepo --help` for usage.'));
+    console.error(dim('\nRun `vibetidy --help` for usage.'));
     return 2;
   }
 
