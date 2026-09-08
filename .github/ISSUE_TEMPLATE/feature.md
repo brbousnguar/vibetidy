@@ -1,6 +1,6 @@
 ---
 name: Feature
-about: Something tidyrepo should do that it does not
+about: Something vibetidy should do that it does not
 labels: feature
 ---
 

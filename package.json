@@ -1,10 +1,10 @@
 {
-  "name": "tidyrepo",
+  "name": "vibetidy",
   "version": "0.1.0",
   "description": "Clean up vibecoded repos: generate a grounded README and keep an issue trail. Zero dependencies.",
   "type": "module",
   "bin": {
-    "tidyrepo": "./bin/tidyrepo.js"
+    "vibetidy": "./bin/vibetidy.js"
   },
   "exports": {
     ".": "./src/index.js"
@@ -39,12 +39,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/brbousnguar/tidyrepo.git"
+    "url": "git+https://github.com/brbousnguar/vibetidy.git"
   },
   "bugs": {
-    "url": "https://github.com/brbousnguar/tidyrepo/issues"
+    "url": "https://github.com/brbousnguar/vibetidy/issues"
   },
-  "homepage": "https://github.com/brbousnguar/tidyrepo#readme",
+  "homepage": "https://github.com/brbousnguar/vibetidy#readme",
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {}

@@ -10,15 +10,15 @@ describe('resolveConfig', () => {
     assert.equal(cfg.apiKey, 'sk-test');
   });
 
-  test('TIDYREPO_API_KEY wins over the provider key', () => {
-    const cfg = resolveConfig({ provider: 'groq' }, { TIDYREPO_API_KEY: 'a', GROQ_API_KEY: 'b' });
+  test('VIBETIDY_API_KEY wins over the provider key', () => {
+    const cfg = resolveConfig({ provider: 'groq' }, { VIBETIDY_API_KEY: 'a', GROQ_API_KEY: 'b' });
     assert.equal(cfg.apiKey, 'a');
   });
 
   test('flags beat environment', () => {
     const cfg = resolveConfig(
       { provider: 'openrouter', model: 'custom/model', baseUrl: 'https://example.test/v1/' },
-      { OPENROUTER_API_KEY: 'k', TIDYREPO_MODEL: 'env/model' },
+      { OPENROUTER_API_KEY: 'k', VIBETIDY_MODEL: 'env/model' },
     );
     assert.equal(cfg.model, 'custom/model');
     assert.equal(cfg.baseUrl, 'https://example.test/v1', 'trailing slash is trimmed');
@@ -45,7 +45,7 @@ describe('resolveConfig', () => {
 
   test('every advertised provider resolves', () => {
     for (const name of providerNames) {
-      const cfg = resolveConfig({ provider: name }, { TIDYREPO_API_KEY: 'k' });
+      const cfg = resolveConfig({ provider: name }, { VIBETIDY_API_KEY: 'k' });
       assert.ok(cfg.baseUrl.startsWith('http'), `${name} has a base url`);
       assert.ok(cfg.model, `${name} has a default model`);
     }

@@ -20,7 +20,7 @@ describe('installHook', () => {
     assert.equal(res.status, 'installed');
     const content = fs.readFileSync(res.path, 'utf8');
     assert.match(content, /^#!\/bin\/sh/);
-    assert.match(content, /tidyrepo issue-check --hook/);
+    assert.match(content, /vibetidy issue-check --hook/);
     assert.match(content, /SKIP_ISSUE_CHECK/);
     if (process.platform !== 'win32') {
       assert.ok(fs.statSync(res.path).mode & 0o111, 'hook is executable');
@@ -73,7 +73,7 @@ describe('uninstallHook', () => {
     assert.equal(uninstallHook(dir).status, 'stripped');
     const content = fs.readFileSync(hookPath, 'utf8');
     assert.match(content, /npm run lint/);
-    assert.doesNotMatch(content, /tidyrepo/);
+    assert.doesNotMatch(content, /vibetidy/);
   });
 
   test('is a no-op when not installed', () => {

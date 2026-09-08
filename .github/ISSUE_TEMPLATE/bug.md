@@ -16,6 +16,6 @@ labels: bug
 
 ## Environment
 
-- tidyrepo version:
+- vibetidy version:
 - `node --version`:
 - OS:

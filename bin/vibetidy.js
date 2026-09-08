@@ -6,6 +6,6 @@ main(process.argv.slice(2))
     process.exitCode = code ?? 0;
   })
   .catch((err) => {
-    console.error(`tidyrepo: ${err?.stack || err}`);
+    console.error(`vibetidy: ${err?.stack || err}`);
     process.exitCode = 1;
   });

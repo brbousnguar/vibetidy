@@ -9,7 +9,7 @@ import { dim, green, red } from './ui.js';
 
 /** Unified diff between two strings, as a printable string. */
 export function renderDiff(before, after, label = 'README.md') {
-  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'tidyrepo-'));
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'vibetidy-'));
   const a = path.join(tmp, 'current');
   const b = path.join(tmp, 'proposed');
   try {
