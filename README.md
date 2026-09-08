@@ -123,7 +123,7 @@ npx tidyrepo issue-check --install-hook      # install the pre-commit hook
 | `--threshold <n>` | Inserted lines that make a change feature-sized (default 40) |
 | `--against <ref>` | Compare against a ref instead of the staged changes |
 | `--create` | Create the issue via `gh` without asking first |
-| `--no-changelog` | Do not write a changelog fragment when creating an issue |
+| `--skip-changelog` | Do not write a changelog fragment when creating an issue |
 | `--install-hook` | Install the pre-commit hook |
 | `--uninstall-hook` | Remove the hook block |
 | `--hook` | Hook mode: quieter, never prompts |

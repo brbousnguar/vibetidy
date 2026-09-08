@@ -176,3 +176,24 @@ describe('issue-check hook management', () => {
     assert.match(res.stdout, /manually/);
   });
 });
+
+describe('documented flags are real flags', () => {
+  // A flag printed in --help but missing from the parser exits 2 on use. This
+  // caught --no-changelog once; it should never happen twice.
+  const flagsIn = (helpText) => [...helpText.matchAll(/^\s{2}(--[a-z-]+)/gm)].map((m) => m[1]);
+
+  for (const command of ['readme', 'issue-check']) {
+    test(`${command}: every flag in --help is accepted by the parser`, () => {
+      const help = runCli([command, '--help']).stdout;
+      const flags = flagsIn(help);
+      assert.ok(flags.length > 3, `found flags in ${command} help`);
+
+      for (const flag of flags) {
+        // --help short-circuits before the command runs, so pair each flag
+        // with it: an unknown flag still fails at parse time, exit 2.
+        const res = runCli([command, flag, 'x', '--help']);
+        assert.notEqual(res.status, 2, `${flag} is documented but rejected: ${res.stderr.trim()}`);
+      }
+    });
+  }
+});

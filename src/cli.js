@@ -31,7 +31,7 @@ const OPTIONS = {
   threshold: { type: 'string' },
   against: { type: 'string' },
   create: { type: 'boolean' },
-  changelog: { type: 'boolean', default: true },
+  'skip-changelog': { type: 'boolean' },
   title: { type: 'string' },
   label: { type: 'string' },
   hook: { type: 'boolean' },
@@ -79,7 +79,7 @@ export async function main(argv) {
   }
 
   if (!commandName) {
-    console.log(parsed.values.help ? HELP : HELP);
+    console.log(HELP);
     return parsed.values.help ? 0 : 1;
   }
 

@@ -26,7 +26,7 @@ Options:
   --threshold <n>     Inserted lines that make a change feature-sized (default 40).
   --against <ref>     Compare against this ref instead of the staged changes.
   --create            Create the issue via gh without asking first.
-  --no-changelog      Do not write a changelog fragment when creating an issue.
+  --skip-changelog    Do not write a changelog fragment when creating an issue.
   --hook              Hook mode: quieter output, never prompts for issue text.
   --install-hook      Install the pre-commit hook in this repo.
   --uninstall-hook    Remove the pre-commit hook block.
@@ -170,7 +170,7 @@ async function createIssueFlow(root, args, branch) {
 
   ok(`Created #${result.number} — ${result.url}`);
 
-  if (args.values.changelog !== false) {
+  if (!args.values['skip-changelog']) {
     writeChangelogFragment(root, branch, title, result.number);
   }
 

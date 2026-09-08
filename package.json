@@ -20,7 +20,7 @@
   },
   "scripts": {
     "test": "node --test \"test/**/*.test.js\"",
-    "lint": "node --check bin/tidyrepo.js",
+    "lint": "node -e \"import('./src/index.js')\"",
     "prepublishOnly": "npm test"
   },
   "keywords": [

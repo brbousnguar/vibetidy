@@ -333,8 +333,7 @@ export function factsToPrompt(facts) {
   };
 
   lines.push('## Repository facts (verified — the only material you may state as fact)');
-  push('Directory name', facts.name);
-  push('Package/project name', facts.name);
+  push('Project name', facts.name);
   push('Version', facts.version);
   push('Existing description', facts.description);
   push('Language', facts.language);

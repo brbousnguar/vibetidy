@@ -22,7 +22,9 @@ describe('installHook', () => {
     assert.match(content, /^#!\/bin\/sh/);
     assert.match(content, /tidyrepo issue-check --hook/);
     assert.match(content, /SKIP_ISSUE_CHECK/);
-    assert.ok(fs.statSync(res.path).mode & 0o111, 'hook is executable');
+    if (process.platform !== 'win32') {
+      assert.ok(fs.statSync(res.path).mode & 0o111, 'hook is executable');
+    }
   });
 
   test('is idempotent', () => {
